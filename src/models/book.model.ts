@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType } from "sequelize-typescript";
-import sequelize from "../database/database";
+import sequelize from "../config/sequelize";
 
 @Table({ tableName: "books", timestamps: true })
 export class Book extends Model {
