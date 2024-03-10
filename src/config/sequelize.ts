@@ -1,20 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
-import { createLogger, format, transports } from 'winston';
+import logger from '../config/logger';
 import { config } from "dotenv";
 
 config();
-
-const logger = createLogger({
-  level: process.env.NODE_ENV === 'production' ? 'error' : 'info',
-  transports: [
-    new transports.Console({
-      format: format.combine(
-        format.simple(),
-        format.printf(({ level, message }) => `[${level}]${message}`)
-      ),
-    }),
-  ],
-});
 
 const sequelize = new Sequelize({
   dialect: "mysql",
@@ -28,8 +16,13 @@ const sequelize = new Sequelize({
   logging: (sql: string, timingMs?: number) => logger.info(`[Sequelize]: ${sql} - ${timingMs}ms`),
 });
 
-sequelize.authenticate()
-    .then(() => logger.info("[Sequelize]: Connection has been established successfully."))
-    .catch(err => logger.error("[Sequelize]: Unable to connect to the database: ", err));
+(async () => {
+  try {
+    await sequelize.authenticate();
+    logger.info("[Sequelize]: Connection has been established successfully.");
+  } catch (err) {
+    logger.error("[Sequelize]: Unable to connect to the database: ", err);
+  }
+})();
 
 export default sequelize;
