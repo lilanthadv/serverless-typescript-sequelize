@@ -12,17 +12,24 @@ custom:
 
 functions:
   add-book:
-    handler: src/handler.createBook
+    handler: src/handlers/book.createBook
     events:
       - http:
           path: books
           method: post
           cors: true
   get-books:
-    handler: src/handler.getBooks
+    handler: src/handlers/book.getBooks
     events:
       - http:
           path: books
+          method: get
+          cors: true
+  get-book:
+    handler: src/handlers/book.getBook
+    events:
+      - http:
+          path: books/{id}
           method: get
           cors: true
 
