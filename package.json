@@ -16,6 +16,7 @@
     "aws-sdk": "^2.1574.0",
     "dotenv": "^16.4.5",
     "http-status": "^1.7.4",
+    "joi": "^17.12.2",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
     "sequelize": "^6.37.1",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.136",
+    "@types/joi": "^17.2.3",
     "@types/node": "^20.11.25",
     "@types/validator": "^13.11.9",
     "sequelize-cli": "^6.6.2",

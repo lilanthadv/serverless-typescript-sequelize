@@ -1,7 +1,7 @@
 import { Callback } from "aws-lambda";
 
 export class ErrorHandler {
-  handleError(error: any, callback: Callback) {
+  public handleError(error: any, callback: Callback) {
     if (error.message === "CustomValidationError") {
       const { errorField, errorMessage } = error;
       const response = {
@@ -28,5 +28,27 @@ export class ErrorHandler {
 
       callback(null, response);
     }
+  }
+
+  public handleValidationError(validationErrors: any, callback: Callback) {
+    const errors: { [key: string]: string[] } = {};
+
+    for (const item of validationErrors.details) {
+      if (!errors[item.path[0]]) {
+        errors[item.path[0]] = [];
+      }
+      errors[item.path[0]].push(item.message);
+    }
+
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify({
+        statusCode: 400,
+        error: "true",
+        data: errors,
+      }),
+    };
+
+    callback(null, response);
   }
 }

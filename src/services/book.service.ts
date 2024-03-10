@@ -20,7 +20,7 @@ export class BookService {
   async getBook(id: number): Promise<Book> {
     const book = await this.bookRepository.getBook(id);
     if(!book){
-      throw new CustomValidationError("id", `Book does not exists`);
+      throw new CustomValidationError("id", "Book does not exists");
     }
     return book;
   }
