@@ -32,6 +32,13 @@ functions:
           path: books/{id}
           method: get
           cors: true
+  update-book:
+    handler: src/handlers/book.updateBook
+    events:
+      - http:
+          path: books/{id}
+          method: put
+          cors: true
 
 plugins:
   - serverless-plugin-typescript

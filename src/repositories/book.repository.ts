@@ -1,4 +1,4 @@
-import { FindOptions } from "sequelize";
+import { FindOptions, UpdateOptions } from "sequelize";
 import { Book } from "../models/book.model";
 
 export class BookRepository {
@@ -13,5 +13,12 @@ export class BookRepository {
       where: { id },
     };
     return Book.findOne(options);
+  }
+
+  async updateBook(id: number, data: { name?: string, author?: string }): Promise<[affectedCount: number]> {
+    const options: UpdateOptions = {
+      where: { id },
+    };
+    return Book.update(data, options)
   }
 }

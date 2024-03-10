@@ -49,4 +49,16 @@ export class BookController {
       return this.errorHandler.handleError(error, callback);
     }
   };
+
+  public updateBook: Handler = async (event, _context, callback) => {
+    try {
+      const id: number = Number(event.pathParameters.id);
+      const body = JSON.parse(event.body);
+
+      const book = await this.bookService.updateBook(id, body);
+      return this.successHandler.successResponse(book, 200);
+    } catch (error: any) {
+      return this.errorHandler.handleError(error, callback);
+    }
+  };
 }

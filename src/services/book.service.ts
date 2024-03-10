@@ -25,4 +25,13 @@ export class BookService {
     return book;
   }
 
+  async updateBook(id: number, data: { name: string, author: string}): Promise<Book | null> {
+    const book = await this.bookRepository.getBook(id);
+    if(!book){
+      throw new CustomValidationError("id", "Book does not exists");
+    }
+    await this.bookRepository.updateBook(id, data);
+    return await this.bookRepository.getBook(id);
+  }
+
 }
