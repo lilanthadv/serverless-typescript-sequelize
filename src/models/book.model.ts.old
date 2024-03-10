@@ -1,0 +1,29 @@
+import { Table, Column, Model, DataType } from 'sequelize-typescript';
+// import sequelize from '../database';
+
+@Table({ tableName: 'books', timestamps: false })
+export class Book extends Model {
+  // @Column({
+  //   type: DataType.INTEGER,
+  //   primaryKey: true,
+  //   autoIncrement: true
+  // })
+  // id!: number;
+
+
+  // @Column({ type: DataType.STRING, allowNull: false })
+  // name: string;
+
+  // @Column({ type: DataType.STRING, allowNull: false })
+  // author: string;
+
+  // @Column(DataType.TEXT)
+  // name: string;
+
+  @Column({
+    type: DataType.STRING(1023),
+  })
+  name: string;
+}
+
+// sequelize.addModels([Book]);
