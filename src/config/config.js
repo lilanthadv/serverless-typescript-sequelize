@@ -1,7 +1,10 @@
+require('dotenv').config();
+
 module.exports = {
-  username: "root",
-  password: "root",
-  database: "serverless-typescript-poc",
-  host: "localhost",
+  host: process.env.DATABASE_HOST,
+  host: process.env.DATABASE_HOST,
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
   dialect: "mysql",
 };

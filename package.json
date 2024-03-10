@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1574.0",
+    "dotenv": "^16.4.5",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
     "sequelize": "^6.37.1",
@@ -21,7 +22,8 @@
     "serverless": "^3.38.0",
     "serverless-offline": "^13.3.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "winston": "^3.12.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.136",
