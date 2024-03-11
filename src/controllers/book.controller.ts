@@ -1,21 +1,17 @@
 import { Handler } from "aws-lambda";
 import { BookService } from "../services/book.service";
-import { ErrorHandler } from "../utils/ErrorHandler";
-import { SuccessHandler } from "../utils/SuccessHandler";
 import { BookValidation } from "../validations/book.validation";
 import { IBookCreate, IBookUpdate } from "../interfaces/book.interface";
+import { BaseController } from "./base.controller";
 
-export class BookController {
+export class BookController extends BaseController{
   private bookService: BookService;
   private bookValidation: BookValidation;
-  private errorHandler: ErrorHandler;
-  private successHandler: SuccessHandler;
 
   constructor() {
+    super();
     this.bookService = new BookService();
     this.bookValidation = new BookValidation();
-    this.errorHandler = new ErrorHandler();
-    this.successHandler = new SuccessHandler();
   }
 
   public createBook: Handler = async (event, _context, callback) => {
