@@ -39,6 +39,13 @@ functions:
           path: books/{id}
           method: put
           cors: true
+  delete-book:
+    handler: src/handlers/book.deleteBook
+    events:
+      - http:
+          path: books/{id}
+          method: delete
+          cors: true
 
 plugins:
   - serverless-plugin-typescript

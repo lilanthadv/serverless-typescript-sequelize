@@ -25,4 +25,8 @@ export class BookRepository extends BaseRepository<Book> {
   ): Promise<[affectedCount: number]> {
     return this.update(id, data);
   }
+
+  async deleteBook(id: number): Promise<number> {
+    return this.delete(id);
+  }
 }

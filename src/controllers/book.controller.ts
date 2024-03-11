@@ -69,4 +69,14 @@ export class BookController extends BaseController{
       return this.errorHandler.handleError(error, callback);
     }
   };
+
+  public deleteBook: Handler = async (event, _context, callback) => {
+    try {
+      const id: number = Number(event.pathParameters.id);
+      const book = await this.bookService.deleteBook(id);
+      return this.successHandler.successResponse(book, 200);
+    } catch (error: any) {
+      return this.errorHandler.handleError(error, callback);
+    }
+  };
 }

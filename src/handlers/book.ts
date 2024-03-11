@@ -18,3 +18,7 @@ export const getBook: Handler = async (event, context, callback) => {
 export const updateBook: Handler = async (event, context, callback) => {
   return bookController.updateBook(event, context, callback);
 };
+
+export const deleteBook: Handler = async (event, context, callback) => {
+  return bookController.deleteBook(event, context, callback);
+};

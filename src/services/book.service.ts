@@ -34,4 +34,12 @@ export class BookService {
     await this.bookRepository.updateBook(id, data);
     return await this.bookRepository.getBook(id);
   }
+
+  async deleteBook(id: number): Promise<number> {
+    const book = await this.bookRepository.delete(id);
+    if (!book) {
+      throw new CustomValidationError("id", "Book does not exists");
+    }
+    return book;
+  }
 }
