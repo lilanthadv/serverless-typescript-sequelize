@@ -1,3 +1,4 @@
+import { IBookCreate, IBookUpdate } from "../interfaces/book.interface";
 import { Book } from "../models/book.model";
 import { BookRepository } from "../repositories/book.repository";
 import CustomValidationError from "../utils/CustomValidationError";
@@ -9,8 +10,8 @@ export class BookService {
     this.bookRepository = new BookRepository();
   }
 
-  async addBook(name: string, author: string): Promise<Book> {
-    return this.bookRepository.createBook(name, author);
+  async addBook(data: IBookCreate): Promise<Book> {
+    return this.bookRepository.createBook(data);
   }
 
   async getBooks(): Promise<Book[]> {
@@ -19,19 +20,18 @@ export class BookService {
 
   async getBook(id: number): Promise<Book> {
     const book = await this.bookRepository.getBook(id);
-    if(!book){
+    if (!book) {
       throw new CustomValidationError("id", "Book does not exists");
     }
     return book;
   }
 
-  async updateBook(id: number, data: { name: string, author: string}): Promise<Book | null> {
+  async updateBook(id: number, data: IBookUpdate): Promise<Book | null> {
     const book = await this.bookRepository.getBook(id);
-    if(!book){
+    if (!book) {
       throw new CustomValidationError("id", "Book does not exists");
     }
     await this.bookRepository.updateBook(id, data);
     return await this.bookRepository.getBook(id);
   }
-
 }

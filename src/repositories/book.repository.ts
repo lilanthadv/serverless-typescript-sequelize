@@ -1,24 +1,28 @@
-import { FindOptions, UpdateOptions } from "sequelize";
+import { IBookCreate, IBookUpdate } from "../interfaces/book.interface";
 import { Book } from "../models/book.model";
+import { BaseRepository } from "./base.repository";
 
-export class BookRepository {
-  async createBook(name: string, author: string): Promise<Book> {
-    return Book.create({ name, author });
+export class BookRepository extends BaseRepository<Book> {
+  constructor() {
+    super(Book);
   }
+
+  async createBook(data: IBookCreate): Promise<Book> {
+    return this.create(data);
+  }
+
   async getBooks(): Promise<Book[]> {
-    return Book.findAll();
-  }
-  async getBook(id: number): Promise<Book | null> {
-    const options: FindOptions = {
-      where: { id },
-    };
-    return Book.findOne(options);
+    return this.findAll();
   }
 
-  async updateBook(id: number, data: { name?: string, author?: string }): Promise<[affectedCount: number]> {
-    const options: UpdateOptions = {
-      where: { id },
-    };
-    return Book.update(data, options)
+  async getBook(id: number): Promise<Book | null> {
+    return this.findById(id);
+  }
+
+  async updateBook(
+    id: number,
+    data: IBookUpdate
+  ): Promise<[affectedCount: number]> {
+    return this.update(id, data);
   }
 }
